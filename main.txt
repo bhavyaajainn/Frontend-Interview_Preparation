@@ -1,0 +1,85 @@
+Notes
+
+copy(document.querySelector('main').innerText)
+
+
+Generate a clean Markdown (.md) file for the following DSA problem that can be copied in one go.
+
+Requirements:
+- Do NOT include any code.
+- Only include structured theory content.
+- Use proper markdown headings (#, ##, ###).
+- Include:
+  - Title
+  - Problem Statement
+  - 3–4 Examples (Input, Output, Explanation format)
+  - Constraints
+  - Time Complexity section
+  - Space Complexity section
+- Keep it interview-ready and clean.
+- Use horizontal separators (---) properly.
+- Do not add extra explanation outside the structure.
+- Make it ready to directly paste into a .md file.
+- Dont include approach
+
+Problem Name:
+<WRITE PROBLEM NAME HERE>
+
+Problem Description:
+<PASTE PROBLEM DESCRIPTION HERE>
+
+create in md code format that I can copy completely in one go
+
+I want to deeply understand software design patterns.
+
+1. First, explain the pattern in simple terms (as if I’m a junior developer).
+2. Then explain the formal definition and category (Creational, Structural, Behavioral).
+3. Show a real-world analogy.
+4. Give backend use cases (Node.js / Java / Python examples preferred).
+5. Give frontend use cases (React / Next.js / Vanilla JS preferred).
+6. Provide 2–3 practical real-world scenarios where this pattern is actually useful in production.
+7. Show a small code example (clean and minimal).
+8. Explain common mistakes and anti-patterns.
+9. Compare it briefly with similar patterns.
+10. Tell me when NOT to use it.
+
+
+I am learning Frontend System Design and writing Medium articles.
+
+Write a detailed, beginner-friendly but interview-ready article about the [Design Pattern Name] in JavaScript.
+
+Follow this exact structure:
+
+1. Hook / Introduction (why this problem exists in frontend apps)
+2. Simple explanation (in plain English)
+3. Formal definition + category (Creational / Structural / Behavioral)
+4. Layman analogy (real-world example)
+5. Technical frontend explanation (why it matters in large apps)
+6. 10+ practical frontend use cases(suggest heading name to be added in medium article as well)
+7. 3 simple working JavaScript examples (pure JS, no classes unless necessary)
+8. When NOT to use this pattern
+9. Common mistakes developers make
+10. Short conclusion with key takeaway
+11. Mention some advanced intreview questions as well
+
+Constraints:
+- Keep examples simple and readable.
+- Prefer functions and closures over classes.
+- Avoid unnecessary complexity.
+- Make it suitable for Medium.
+- Tone should be clear, confident, and structured.
+
+Suggest some unique titles and cover image that can be added in medium article
+
+
+Topics- 
+
+JavaScript
+
+Frontend Development
+
+System Design
+
+Software Architecture
+
+Design Patterns
