@@ -2,6 +2,24 @@
 
 function frequencySort(s) {
   // Write your solution here
+  const frequency = s.split("").reduce((a, b) => {
+    a[b] ? a[b]++ : (a[b] = 1);
+    return a;
+  }, {});
+  const sortedCharactersArr = Object.keys(frequency).sort((a, b) => {
+    if (frequency[a] > frequency[b]) {
+      return -1;
+    } else if (frequency[a] < frequency[b]) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+  const ans = sortedCharactersArr.reduce((a, b) => {
+    a += b.repeat(frequency[b]);
+    return a;
+  }, "");
+  return ans;
 }
 
 // Helper: verify output is a valid frequency-sorted string
@@ -10,7 +28,7 @@ function isValidFrequencySort(input, output) {
   if (input.length !== output.length) return false;
 
   // Check all characters match
-  const sortStr = (s) => s.split('').sort().join('');
+  const sortStr = (s) => s.split("").sort().join("");
   if (sortStr(input) !== sortStr(output)) return false;
 
   // Check each character appears in one contiguous block
@@ -41,10 +59,10 @@ function isValidFrequencySort(input, output) {
 
 function testFrequencySort() {
   const tests = [
-    { s: "tree",   desc: "e×2, t×1, r×1" },
+    { s: "tree", desc: "e×2, t×1, r×1" },
     { s: "cccaaa", desc: "c×3, a×3 — any order valid" },
-    { s: "Aabb",   desc: "b×2, A×1, a×1 — case sensitive" },
-    { s: "a",      desc: "single char" },
+    { s: "Aabb", desc: "b×2, A×1, a×1 — case sensitive" },
+    { s: "a", desc: "single char" },
     { s: "aabbcc", desc: "all freq equal" },
     { s: "aaabbb", desc: "a×3, b×3" },
     { s: "eeeebb", desc: "e×4, b×2" },
@@ -53,7 +71,9 @@ function testFrequencySort() {
   for (let { s, desc } of tests) {
     let result = frequencySort(s);
     let pass = isValidFrequencySort(s, result);
-    console.log(`frequencySort("${s}") [${desc}]: ${pass ? "Success" : "Fail"} (got "${result}")`);
+    console.log(
+      `frequencySort("${s}") [${desc}]: ${pass ? "Success" : "Fail"} (got "${result}")`,
+    );
   }
 }
 testFrequencySort();
