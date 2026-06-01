@@ -8,31 +8,34 @@
 
 const extend = (Parent, Child) => {
   // TODO
+  Child.prototype.__proto__ = Parent.prototype;
+  Child.__proto__ = Parent;
+  Child.prototype.constructor = Child;
 };
 
 // --- Setup ---
 
 function Person() {
-  this.name = 'PersonName';
+  this.name = "PersonName";
 }
 Person.prototype.walk = function () {
-  return this.name + ' is walking';
+  return this.name + " is walking";
 };
 Person.prototype.sayHello = function () {
-  return 'hello from Person';
+  return "hello from Person";
 };
 Person.staticMethod = function () {
-  return 'static from Person';
+  return "static from Person";
 };
 
 function Student() {
-  this.name = 'StudentName';
+  this.name = "StudentName";
 }
 Student.prototype.sayHello = function () {
-  return 'hi, I am a student';
+  return "hi, I am a student";
 };
 Student.prototype.sayGoodBye = function () {
-  return 'goodbye';
+  return "goodbye";
 };
 
 extend(Person, Student);
@@ -41,7 +44,7 @@ extend(Person, Student);
 
 function test(name, actual, expected) {
   const ok = JSON.stringify(actual) === JSON.stringify(expected);
-  console.log(`${ok ? 'PASS' : 'FAIL'}: ${name}`);
+  console.log(`${ok ? "PASS" : "FAIL"}: ${name}`);
   if (!ok) {
     console.log(`  Expected: ${JSON.stringify(expected)}`);
     console.log(`  Got:      ${JSON.stringify(actual)}`);
@@ -49,36 +52,60 @@ function test(name, actual, expected) {
 }
 
 const student = new Student();
-const person  = new Person();
+const person = new Person();
 
 // TC1 — child's own method works
-test('TC1: child own method', student.sayHello(), 'hi, I am a student');
+test("TC1: child own method", student.sayHello(), "hi, I am a student");
 
 // TC2 — child's other own method works
-test('TC2: child own method (sayGoodBye)', student.sayGoodBye(), 'goodbye');
+test("TC2: child own method (sayGoodBye)", student.sayGoodBye(), "goodbye");
 
 // TC3 — child inherits parent method not overridden
-test('TC3: child inherits walk from parent', student.walk(), 'StudentName is walking');
+test(
+  "TC3: child inherits walk from parent",
+  student.walk(),
+  "StudentName is walking",
+);
 
 // TC4 — child's sayHello overrides parent's (not "hello from Person")
-test('TC4: child method overrides parent method', student.sayHello() !== 'hello from Person', true);
+test(
+  "TC4: child method overrides parent method",
+  student.sayHello() !== "hello from Person",
+  true,
+);
 
 // TC5 — instanceof Parent returns true
-test('TC5: student instanceof Person', student instanceof Person, true);
+test("TC5: student instanceof Person", student instanceof Person, true);
 
 // TC6 — instanceof Child returns true
-test('TC6: student instanceof Student', student instanceof Student, true);
+test("TC6: student instanceof Student", student instanceof Student, true);
 
 // TC7 — static methods accessible on Child
-test('TC7: static method inherited', Student.staticMethod(), 'static from Person');
+test(
+  "TC7: static method inherited",
+  Student.staticMethod(),
+  "static from Person",
+);
 
 // TC8 — child constructor points to Child, not Parent
-test('TC8: constructor points to Student', student.constructor === Student, true);
+test(
+  "TC8: constructor points to Student",
+  student.constructor === Student,
+  true,
+);
 
 // TC9 — parent instance is unaffected
-test('TC9: parent instance uses its own sayHello', person.sayHello(), 'hello from Person');
+test(
+  "TC9: parent instance uses its own sayHello",
+  person.sayHello(),
+  "hello from Person",
+);
 
 // TC10 — parent does not get child methods
-test('TC10: parent does not inherit sayGoodBye', typeof person.sayGoodBye, 'undefined');
+test(
+  "TC10: parent does not inherit sayGoodBye",
+  typeof person.sayGoodBye,
+  "undefined",
+);
 
-console.log('\nAll tests done');
+console.log("\nAll tests done");

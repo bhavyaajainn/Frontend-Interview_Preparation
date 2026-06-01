@@ -3,6 +3,31 @@
 
 const fetchWithTimeout = (url, duration) => {
   // TODO: use AbortController + setTimeout to abort if duration exceeded
+  return new Promise((resolve, reject) => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+    const timerid = null;
+
+    fetch(url, { signal })
+      .then((resp) => {
+        resp
+          .json()
+          .then((e) => {
+            clearTimeout(timerid);
+            resolve(e);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      })
+      .catch((err) => {
+        reject(err);
+      });
+    timerid = setTimeout(() => {
+      console.log("Aborted");
+      controller.abort();
+    }, duration);
+  });
 };
 
 // --- Test helpers ---
@@ -11,10 +36,12 @@ function testAsync(name, promise, expectResolve, checkValue) {
   return promise
     .then((val) => {
       if (!expectResolve) {
-        console.log(`FAIL: ${name} — expected rejection but resolved with ${JSON.stringify(val)}`);
+        console.log(
+          `FAIL: ${name} — expected rejection but resolved with ${JSON.stringify(val)}`,
+        );
       } else {
         const ok = checkValue ? checkValue(val) : true;
-        console.log(`${ok ? 'PASS' : 'FAIL'}: ${name}`);
+        console.log(`${ok ? "PASS" : "FAIL"}: ${name}`);
         if (!ok) console.log(`  Got: ${JSON.stringify(val)}`);
       }
     })
@@ -23,7 +50,7 @@ function testAsync(name, promise, expectResolve, checkValue) {
         console.log(`FAIL: ${name} — expected resolve but rejected: ${err}`);
       } else {
         const ok = checkValue ? checkValue(err) : true;
-        console.log(`${ok ? 'PASS' : 'FAIL'}: ${name}`);
+        console.log(`${ok ? "PASS" : "FAIL"}: ${name}`);
         if (!ok) console.log(`  Got: ${err}`);
       }
     });
@@ -40,9 +67,9 @@ function mockFetch(data, delay) {
         });
       }, delay);
 
-      signal?.addEventListener('abort', () => {
+      signal?.addEventListener("abort", () => {
         clearTimeout(timer);
-        reject(new DOMException('The user aborted a request.', 'AbortError'));
+        reject(new DOMException("The user aborted a request.", "AbortError"));
       });
     });
 }
@@ -54,49 +81,59 @@ const origFetch = globalThis.fetch;
 
 // TC1 — resolves when fetch finishes before timeout
 globalThis.fetch = mockFetch({ id: 1 }, 50);
-allTests.push(testAsync(
-  'TC1: resolves when fetch is faster than timeout',
-  fetchWithTimeout('http://test', 200),
-  true,
-  (val) => val?.id === 1
-));
+allTests.push(
+  testAsync(
+    "TC1: resolves when fetch is faster than timeout",
+    fetchWithTimeout("http://test", 200),
+    true,
+    (val) => val?.id === 1,
+  ),
+);
 
 // TC2 — rejects when fetch is slower than timeout
 globalThis.fetch = mockFetch({ id: 1 }, 300);
-allTests.push(testAsync(
-  'TC2: rejects when timeout expires before fetch',
-  fetchWithTimeout('http://test', 100),
-  false,
-  (err) => err.name === 'AbortError'
-));
+allTests.push(
+  testAsync(
+    "TC2: rejects when timeout expires before fetch",
+    fetchWithTimeout("http://test", 100),
+    false,
+    (err) => err.name === "AbortError",
+  ),
+);
 
 // TC3 — AbortError name is correct on timeout
 globalThis.fetch = mockFetch({}, 500);
-allTests.push(testAsync(
-  'TC3: rejection is AbortError',
-  fetchWithTimeout('http://test', 50),
-  false,
-  (err) => err.name === 'AbortError'
-));
+allTests.push(
+  testAsync(
+    "TC3: rejection is AbortError",
+    fetchWithTimeout("http://test", 50),
+    false,
+    (err) => err.name === "AbortError",
+  ),
+);
 
 // TC4 — timeout of exactly 0 always aborts
 globalThis.fetch = mockFetch({ ok: true }, 100);
-allTests.push(testAsync(
-  'TC4: duration=0 always aborts',
-  fetchWithTimeout('http://test', 0),
-  false
-));
+allTests.push(
+  testAsync(
+    "TC4: duration=0 always aborts",
+    fetchWithTimeout("http://test", 0),
+    false,
+  ),
+);
 
 // TC5 — very long timeout, fetch resolves with correct data
-globalThis.fetch = mockFetch({ title: 'hello' }, 30);
-allTests.push(testAsync(
-  'TC5: correct data returned on fast fetch',
-  fetchWithTimeout('http://test', 5000),
-  true,
-  (val) => val?.title === 'hello'
-));
+globalThis.fetch = mockFetch({ title: "hello" }, 30);
+allTests.push(
+  testAsync(
+    "TC5: correct data returned on fast fetch",
+    fetchWithTimeout("http://test", 5000),
+    true,
+    (val) => val?.title === "hello",
+  ),
+);
 
 Promise.all(allTests).then(() => {
   globalThis.fetch = origFetch;
-  console.log('\nAll tests done');
+  console.log("\nAll tests done");
 });
