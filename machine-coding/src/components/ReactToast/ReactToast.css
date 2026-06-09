@@ -1,0 +1,52 @@
+.toast-container {
+  position: fixed;
+  top: 0.5em;
+  right: 0.5em;
+}
+
+.toast {
+  color: white;
+  padding: 0.6em;
+  position: relative;
+  width: 12em;
+  animation: slide 1s 1;
+  margin: 0.5em;
+  border-radius: 0.5em;
+  span {
+    position: absolute;
+    right: 1em;
+    font-size: 1em;
+    cursor: pointer;
+  }
+}
+
+.success {
+  background-color: green;
+}
+
+.info {
+  background-color: blue;
+}
+
+.warning {
+  background-color: orange;
+}
+
+.error {
+  background-color: red;
+}
+
+.btn-container {
+  height: 100vh;
+  margin-top: 45%;
+  margin-left: 10%;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
