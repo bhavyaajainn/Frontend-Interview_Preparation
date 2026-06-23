@@ -1,0 +1,19 @@
+.game-container {
+  height: 15rem;
+  width: 15rem;
+  border: 2px solid black;
+  display: grid;
+  grid-template-columns: repeat(15, 1fr);
+}
+
+.game-cell {
+}
+
+.food {
+  background-color: red;
+  border-radius: 50%;
+}
+
+.snake {
+  background-color: green;
+}
