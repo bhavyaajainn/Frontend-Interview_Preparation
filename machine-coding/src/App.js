@@ -1,7 +1,7 @@
-import ReactMemoryGame from "./components/ReactMemoryGame/ReactMemoryGame";
+import ReactNestedComponents from "./components/ReactNestedComments/ReactNestedComponents";
 
 function App() {
-  return <ReactMemoryGame />;
+  return <ReactNestedComponents />;
 }
 
 export default App;
