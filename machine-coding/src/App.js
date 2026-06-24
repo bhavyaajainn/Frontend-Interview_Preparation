@@ -1,11 +1,7 @@
-import ReactEditableTodo from "./components/ReactEditableTodo/ReactEditableTodo";
-import ReactSnakeGame from "./components/ReactSnakeGame/ReactSnakeGame";
-import ReactTabs from "./components/ReactTabs/ReactTabs";
-import ReactTicTacToe from "./components/ReactTicTacToe/ReactTicTacToe";
-import ReactTodo from "./components/ReactTodo/ReactTodo";
+import ReactMemoryGame from "./components/ReactMemoryGame/ReactMemoryGame";
 
 function App() {
-  return <ReactEditableTodo />;
+  return <ReactMemoryGame />;
 }
 
 export default App;
