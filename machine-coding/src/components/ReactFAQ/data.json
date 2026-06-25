@@ -1,0 +1,54 @@
+{
+  "faqs": [
+    {
+      "id": 1,
+      "question": "What is React?",
+      "answer": "React is a JavaScript library used for building user interfaces with reusable components."
+    },
+    {
+      "id": 2,
+      "question": "What is the difference between state and props?",
+      "answer": "Props are read-only data passed from a parent component, while state is mutable data managed within a component."
+    },
+    {
+      "id": 3,
+      "question": "What are React Hooks?",
+      "answer": "Hooks are functions that allow React components to use state, lifecycle methods, and other React features without classes."
+    },
+    {
+      "id": 4,
+      "question": "Why should I use TypeScript in frontend applications?",
+      "answer": "TypeScript provides static type checking, better IDE support, and helps catch errors during development."
+    },
+    {
+      "id": 5,
+      "question": "What is component reusability?",
+      "answer": "Component reusability is the practice of creating generic UI components that can be used across multiple parts of an application."
+    },
+    {
+      "id": 6,
+      "question": "How can I improve frontend performance?",
+      "answer": "You can optimize performance using lazy loading, code splitting, memoization, and reducing unnecessary re-renders."
+    },
+    {
+      "id": 7,
+      "question": "What is responsive web design?",
+      "answer": "Responsive web design ensures that a website adapts to different screen sizes and devices using flexible layouts and media queries."
+    },
+    {
+      "id": 8,
+      "question": "What is client-side routing?",
+      "answer": "Client-side routing allows navigation between pages without reloading the browser by managing routes within the frontend application."
+    },
+    {
+      "id": 9,
+      "question": "What is a design system?",
+      "answer": "A design system is a collection of reusable components, design guidelines, and standards used to maintain consistency across applications."
+    },
+    {
+      "id": 10,
+      "question": "What is the Virtual DOM in React?",
+      "answer": "The Virtual DOM is a lightweight representation of the real DOM that React uses to efficiently update only the changed parts of the UI."
+    }
+  ]
+}

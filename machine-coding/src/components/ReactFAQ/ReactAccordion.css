@@ -1,0 +1,19 @@
+.faq-container {
+  margin: 0.5em;
+}
+
+.faq {
+  border: 1px solid black;
+  padding: 0.5em;
+  margin-bottom: 1em;
+}
+
+.faq-card {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5em;
+}
+
+.icon {
+  cursor: pointer;
+}
